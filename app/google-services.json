@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "663102146929",
+    "project_id": "smsbot-e4e5a",
+    "storage_bucket": "smsbot-e4e5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:663102146929:android:67d72639241ac97d4a4ed0",
+        "android_client_info": {
+          "package_name": "com.firoz.mahmud.smsbot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNbv5ReHOdoOrjmUd99UhMwkIIeQ9G5Bg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

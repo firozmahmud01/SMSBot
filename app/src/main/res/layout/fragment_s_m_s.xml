@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SMS">
+
+    <EditText
+        android:id="@+id/smstimedelayedittext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Time in seconds"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/smsaddbutton"
+        app:layout_constraintStart_toStartOf="@+id/smsedittext"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/smslistview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/smsedittext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="Type SMS"
+
+        android:inputType="textMultiLine"
+        android:lines="3"
+        app:layout_constraintEnd_toStartOf="@+id/smsaddbutton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/smstimedelayedittext" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Long press to remove and sort for edit"
+        app:layout_constraintStart_toStartOf="@+id/smsedittext"
+        app:layout_constraintTop_toBottomOf="@+id/smsedittext" />
+
+    <Button
+        android:id="@+id/smsaddbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="ADD"
+        app:layout_constraintBottom_toBottomOf="@+id/smsedittext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/smstimedelayedittext" />
+
+    <ImageView
+        android:id="@+id/smsimageview"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@android:drawable/ic_menu_gallery"
+        app:layout_constraintBottom_toBottomOf="@+id/smsedittext"
+        app:layout_constraintEnd_toEndOf="@+id/smsedittext" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -53,12 +53,14 @@ public class MMSSernder extends AccessibilityService {
 
     }
 
+
     public static boolean ismms=false;
 public static boolean startmms=false;
-    public void sendSms(Map<String,Integer> users, Map<String,Long>timet) throws Exception {
+    public void sendSms(Map<String,Integer> users,Map<String,Long> utt) throws Exception {
         SharedPreferences sp=getSharedPreferences("data",MODE_PRIVATE);
         Set<String> keys=users.keySet();
         Iterator<String> ite=keys.iterator();
+
         while(ite.hasNext()){
             String address=ite.next();
             int old=sp.getInt(address+"count",0);
@@ -70,13 +72,7 @@ public static boolean startmms=false;
                     continue;
                 }
                 JSONObject jo=arr.getJSONObject(index);
-                long lastsms=sp.getLong(address+"last",-2);
-                if(lastsms==-2){
-                    SharedPreferences.Editor she=sp.edit();
-                    she.putLong(address+"last",System.currentTimeMillis());
-                    she.apply();
-                    lastsms=System.currentTimeMillis();
-                }
+                long lastsms=utt.get(address);
                 long dis= TimeUnit.MILLISECONDS.toSeconds(System.currentTimeMillis())-TimeUnit.MILLISECONDS.toSeconds(lastsms);
                 if (dis<jo.getInt("time"))continue;
 
@@ -120,9 +116,10 @@ public static boolean startmms=false;
                         int a=10;
                     }
                 }else {
-
-                    SmsManager sms = SmsManager.getDefault();
-                    sms.sendMultipartTextMessage(address, null, sms.divideMessage(jo.getString("msg")), null, null);
+                    try {
+                        SmsManager sms = SmsManager.getDefault();
+                        sms.sendMultipartTextMessage(address, null, sms.divideMessage(jo.getString("msg")), null, null);
+                    }catch (Exception e){}
                 }
                 SharedPreferences.Editor she=sp.edit();
                 she.putInt(address+"count",newc);
@@ -178,8 +175,10 @@ public static boolean startmms=false;
                             int a=10;
                         }
                     }else{
-                        SmsManager sms=SmsManager.getDefault();
-                        sms.sendMultipartTextMessage(address,null,sms.divideMessage(jo.getString("msg")),null,null);
+                        try {
+                            SmsManager sms = SmsManager.getDefault();
+                            sms.sendMultipartTextMessage(address, null, sms.divideMessage(jo.getString("msg")), null, null);
+                        }catch (Exception e){}
                     }
 
 
@@ -315,7 +314,7 @@ Thread thread=null;
                 thread=new Thread(){
                     @Override
                     public void run() {
-                            SharedPreferences sp=MMSSernder.this.getSharedPreferences("data",MODE_PRIVATE);
+
                             while(true) {
                         try {
                             if(shouldstart) {
@@ -334,20 +333,10 @@ Thread thread=null;
 
     }
 
-
-
     @Override
     public void onInterrupt() {
-        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+
     }
-
-
-
-
-
-
 
 
     public AccessibilityNodeInfo nodetotext(AccessibilityNodeInfo root,String data){
